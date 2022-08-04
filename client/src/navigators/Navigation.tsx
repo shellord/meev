@@ -1,11 +1,12 @@
 import React from 'react';
 import HomeStack from './RootStack';
 import AuthStack from './AuthStack';
+import useAuthentication from '../hooks/useAuthentication';
 
 const Navigation = () => {
-  const isLoggedIn = false;
+  const { user } = useAuthentication();
 
-  return isLoggedIn ? <HomeStack /> : <AuthStack />;
+  return user ? <HomeStack /> : <AuthStack />;
 };
 
 export default Navigation;

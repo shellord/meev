@@ -2,6 +2,7 @@ import { ApolloServer } from 'apollo-server';
 import typeDefs from './type-defs';
 import resolvers from './resolvers';
 import { createContext } from './context';
+import './lib/firebase';
 
 const server = new ApolloServer({ typeDefs, resolvers, context: createContext });
 

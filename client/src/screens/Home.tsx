@@ -1,9 +1,17 @@
 import { View, Button } from 'react-native';
 import React from 'react';
 import useAuthentication from '../hooks/useAuthentication';
+import { gql, useQuery } from '@apollo/client';
 
 const Home = () => {
-  const { signOut, user } = useAuthentication();
+  const { signOut } = useAuthentication();
+  const { data, loading } = useQuery(gql`
+    query Query {
+      me
+    }
+  `);
+
+  console.log(data);
 
   const handleLogout = async () => {
     try {
@@ -12,29 +20,6 @@ const Home = () => {
       console.log(error);
     }
   };
-
-  const sendRequest = async () => {
-    const token = await user?.getIdToken();
-    if (!token) return;
-    const res = await fetch('http://localhost:4000', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        query: `
-            query {
-              me
-            }
-          `,
-      }),
-    });
-    const data = await res.json();
-    console.log(data);
-  };
-
-  sendRequest();
 
   return (
     <View>

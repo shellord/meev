@@ -21,10 +21,10 @@ const AuthStack = () => {
   const Stack = createNativeStackNavigator<AuthStackParamList>();
 
   const screenOptions = {
-    headerShown: true,
+    headerShown: false,
   };
 
-  const isShowWelcome = false;
+  const isShowWelcome = true;
 
   return (
     <NavigationContainer>
